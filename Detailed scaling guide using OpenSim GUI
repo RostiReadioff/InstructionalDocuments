@@ -38,9 +38,7 @@ A web front-end for BTK is available at http://tools.noventas.org
 B.	Coordinate Systems
 Opensim uses the standard engineering coordinate system of X forward (Red), Y up (Green), Z right (Blue). Most motion capture systems use different laboratory coordinates (X forward, Y left, Z up) and require a 90 degree rotation about the X axis, that can be performed in OpenSim GUI:
 
-![Transform Data](https://github.com/RostiReadioff/InstructionalDocuments/blob/346abb1e7fea1b028d1d9c288a580c25f306b29b/TransformingData.JPG).
-
-
+![Transform Data](https://raw.githubusercontent.com/RostiReadioff/InstructionalDocuments/main/TransformingData.JPG).
 
 
 C.	In the OpenSim model file, define which markers placement are the most accurate (i.e. anatomical markers,  joint centers, virtual markers) by defining them as “fixed”: 
