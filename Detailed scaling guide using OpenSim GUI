@@ -40,6 +40,9 @@ Opensim uses the standard engineering coordinate system of X forward (Red), Y up
 
 ![Transform Data](https://github.com/RostiReadioff/InstructionalDocuments/blob/346abb1e7fea1b028d1d9c288a580c25f306b29b/TransformingData.JPG).
 
+
+
+
 C.	In the OpenSim model file, define which markers placement are the most accurate (i.e. anatomical markers,  joint centers, virtual markers) by defining them as “fixed”: 
 This way, they will not be moved during the scaling process. Other markers that are not defined as “fixed” (i.e. cluster markers or other experimental markers which location on each segment can vary from session to session) will be moved on the scaled model during the process to match the placement of the experimental ones.
 
