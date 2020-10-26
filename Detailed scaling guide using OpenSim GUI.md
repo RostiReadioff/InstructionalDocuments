@@ -44,6 +44,8 @@ Opensim uses the standard engineering coordinate system of X forward (Red), Y up
 C.	In the OpenSim model file, define which markers placement are the most accurate (i.e. anatomical markers,  joint centers, virtual markers) by defining them as “fixed”: 
 This way, they will not be moved during the scaling process. Other markers that are not defined as “fixed” (i.e. cluster markers or other experimental markers which location on each segment can vary from session to session) will be moved on the scaled model during the process to match the placement of the experimental ones.
 
+![Fixing Data](https://raw.githubusercontent.com/RostiReadioff/InstructionalDocuments/main/FixingData.png).
+
 D.	Create the virtual markers needed to define each segment in three axis
 •	See video webinar
 •	Take screenshots
@@ -70,13 +72,9 @@ Non-uniform scaling is recommended during the manual scaling, this allows models
 
 If you are scaling a model using both manual scaling and marker data approach, then you need to carry out the following steps to prepare the necessary information:
 
-
-
-
-
-
+![Scale Tool](https://raw.githubusercontent.com/RostiReadioff/InstructionalDocuments/main/ScaleTool.png).
  
-Figure 1: Showing scale tool which consists of three tabs: ‘Settings’, ‘Scale Factors’, and ‘Static Pose Weights’. 
+This figure shows scale tool which consists of three tabs: ‘Settings’, ‘Scale Factors’, and ‘Static Pose Weights’. 
 
 The Settings tab:
 
@@ -92,14 +90,15 @@ This option should be ticked in most situations. It a) moves the model in the su
 a.	Calculation of the static pose:
 The model will keep its default “pose” (joint angles) if the “adjust model markers” is not ticked. Example:
 
-
+![Model Pose](https://raw.githubusercontent.com/RostiReadioff/InstructionalDocuments/main/ModelPose.JPG).
  	 	 
 Default model position	“Adjust model markers” not ticked	“Adjust model markers” ticked
 
 b.	Marker registration
 Marker registration moves the markers of the model (that are not designed as “fixed”) to match those of the trc file. Example:
 
- 	 
+![Model Marker](https://raw.githubusercontent.com/RostiReadioff/InstructionalDocuments/main/ModelMarker.JPG).
+
 If we do not perform a registration, the cluster markers (even though they are not “fixed”) will remain in the default location they had in the model in relation to their segment	If we do perform a registration, the cluster markers (which are not “fixed”) will match the experimental locations
 
 “Preview static pose” option is disregarded in opensim 4x, and we should use “Preview Experimental data” to compare/overlay the model markers and experimental markers: see issue/comment, does not seem to work with opensim >3.3
@@ -111,14 +110,16 @@ The Scale Factors tab:
 •	Example config file with screenshots
 
 The Static Pose Weights tab:
-•	?
+•	
 
 
 
 Discussion on mass distribution in OpenSim
 How is mass scaled in the OpenSim model? This is based on a conversation Dan and I had.
 We found out that the mass input into the model during the scaling process should be relevant to the segments that exist in the model. For example, you cannot add a total mass of a person in a model while the model only consists of the torso and one arm because OpenSim thinks the mass you added is for the existing segments. Hence, the correct way to do this is to estimate mass for the existing segments in the model, and this is tricky to do very accurately. There are some generic solutions:
+
 •	There is a paper by Dempster & Gaughran (1967) (suggested by Dan) and they try to generalize mass distribution across the body based on total body mass. This can be used as a way to estimate the relevant weight that needs to be added to the model. Table 4 and Table 6 are relevant. However, this paper used cadavers with limited representations. Link to paper: https://people.unica.it/brunoleban/files/2013/10/Dempster-AJA1967-Properties-od-body-segments-based-on-size-and-weight.pdf
+
 •	Alternatively, as Dan suggested you can derive a rough ratio based on AJ’s paper about their shoulder model. AJ had a participant with total mass of 52kg, and in their model they have added 24.6787kg in their model. So, 24.6787/51 gives roughly 0.47459. Hence, if for example a mass of a person is 80kg, then the mass that needs to be added into AJ’s model during scaling will be 80*0.47459=37.9672kg.
 
 
