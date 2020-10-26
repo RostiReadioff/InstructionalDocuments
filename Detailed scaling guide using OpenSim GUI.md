@@ -54,8 +54,8 @@ ________________________________________
 
 ### 2. Scaling
 
-_How to scale a model?_
-There are three ways to scale a model when using the scaling tool in OpenSim, you can scale using:
+_How to scale a model?_  
+There are three ways to scale a model when using the scaling tool in OpenSim, you can scale using:  
 •	Marker data  
 •	Manual scaling  
 •	Mix of markers and manual scaling  
