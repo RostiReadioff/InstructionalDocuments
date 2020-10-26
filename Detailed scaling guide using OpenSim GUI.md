@@ -1,5 +1,6 @@
 # Scaling using OpenSim GUI  
-Authors: Rosti Readioff, Martin Seyres  
+#### Authors: Rosti Readioff, Martin Seyres  
+  
 There are a number of sources available on how to use the scaling tool in OpenSim GUI; however, the guidance available is very generic because the process of scaling is highly subjective.
 Therefore, here, we outline the important steps, tips and shortcuts that can be performed to successfully scale a model to a desired outcome.   
   
@@ -9,51 +10,48 @@ We structured the document into three sections, namely:
 3.	Post-scaling: assessment of a scaled model, what is required and what to look out for?  
   
 Please note that the scaling methodology below is based on the current version of OpenSim 4.0 and OpenSim 4.1. 
-
+  
 ## What is the principle of scaling and why is it important?
 Scaling is changing the size of a generic model to a more personalised model.
 Generic models are built based on cadavers.
 A generic model can have one or multiple parts of the body, for example a model can have one upper limb with the thorax and scapula.
 Scaling generic models is important to output a more representative or subject-specific result.  
-
+  
 ### 1.	Pre-scaling: what is required and what to look out for?
-If you are scaling a model using marker data only, then you need to carry out the following steps to prepare the necessary files.
- 
-A.	Trc files to input in OpenSim Scale tool
+If you are scaling a model using marker data only, then you need to carry out the following steps to prepare the necessary files.  
+  
+A.	Trc files to input in OpenSim Scale tool  
+  
 Marker data collected from a Vicon-like system in a biomechanics lab are stored in a binary file format called C3D file. Currently, C3D files cannot be read directly in the OpenSim GUI, they need to be converted to other file types such as .trc and .mot files (please note that .mot file is not relevant to the scaling of a model).
 A TRC file is a tab-separated-values text format (similar to “TVS”) and can therefore be opened with spreadsheet software (Excel, LibreOfficeCalc, …) to change the marker labels, or add or remove values.
-
-In addition, marker data collected in biomechanics labs could have different coordinate systems and marker labels compared to the OpenSim generic model. Therefore, the initial step is to convert the C3D file into an appropriate file format before commencing with the transformation and label matching. 
-
-There are a number of ways to read C3D files and correct marker labels, one is to use Mokka. This software allows you to save your C3D file as different file formats including .trc, and you can also manipulate the marker labels and also create average markers.
+In addition, marker data collected in biomechanics labs could have different coordinate systems and marker labels compared to the OpenSim generic model.
+Therefore, the initial step is to convert the C3D file into an appropriate file format before commencing with the transformation and label matching.  
+  
+There are a number of ways to read C3D files and correct marker labels, one is to use Mokka.
+This software allows you to save your C3D file as different file formats including .trc, and you can also manipulate the marker labels and also create average markers.
 Mokka is a graphical interface for the Biomechanical Toolkit which has API for C++, Matlab and Python (https://biomechanical-toolkit.github.io/).
-
-OpenSim, since version 4.0, also uses BTK to convert and manipulate C3D and trc files. It is accessible from the opensim API (C++, Matlab and Python) but not directly in the OpenSim GUI.
+OpenSim, since version 4.0, also uses BTK to convert and manipulate C3D and trc files.
+It is accessible from the opensim API (C++, Matlab and Python) but not directly in the OpenSim GUI.
 To use OpenSim’s MATLAB API, there is an example script called ‘c3dExport.m’ which usually comes with the OpenSim software and you can find it in OpenSim’s script folder (C:\...\Documents\OpenSim\4.1\Code\Matlab).
 Several proprietary software from the Motion Capture Systems also allow exporting in a trc compatible format, instead of C3D (Qualisys, ?Vicon).
-A web front-end for BTK is available at http://tools.noventas.org
-
-B.	Coordinate Systems
-Opensim uses the standard engineering coordinate system of X forward (Red), Y up (Green), Z right (Blue). Most motion capture systems use different laboratory coordinates (X forward, Y left, Z up) and require a 90 degree rotation about the X axis, that can be performed in OpenSim GUI:
-
+A web front-end for BTK is available at http://tools.noventas.org  
+  
+B.	Coordinate Systems  
+  
+Opensim uses the standard engineering coordinate system of X forward (Red), Y up (Green), Z right (Blue). Most motion capture systems use different laboratory coordinates (X forward, Y left, Z up) and require a 90 degree rotation about the X axis, that can be performed in OpenSim GUI:  
 ![Transform Data](https://raw.githubusercontent.com/RostiReadioff/InstructionalDocuments/main/TransformingData.JPG).
-
-
-C.	In the OpenSim model file, define which markers placement are the most accurate (i.e. anatomical markers,  joint centers, virtual markers) by defining them as “fixed”: 
-This way, they will not be moved during the scaling process. Other markers that are not defined as “fixed” (i.e. cluster markers or other experimental markers which location on each segment can vary from session to session) will be moved on the scaled model during the process to match the placement of the experimental ones.
-
+  
+C.	In the OpenSim model file, define which markers placement are the most accurate (i.e. anatomical markers,  joint centers, virtual markers) by defining them as “fixed”: This way, they will not be moved during the scaling process.
+Other markers that are not defined as “fixed” (i.e. cluster markers or other experimental markers which location on each segment can vary from session to session) will be moved on the scaled model during the process to match the placement of the experimental ones.  
 ![Fixing Data](https://raw.githubusercontent.com/RostiReadioff/InstructionalDocuments/main/FixingData.png).
-
-D.	Create the virtual markers needed to define each segment in three axis
-•	See video webinar
-•	Take screenshots
-•	Show mokka + matlab + python option to generate averaged marker for joint center (e.g. elbow), show online option
-•	Provide example of calculation of a joint center marker from a) dynamic movement trials and b) regression equation
-
-________________________________________
-
-### 2. Scaling
-
+  
+D.	Create the virtual markers needed to define each segment in three axis  
+•	See video webinar  
+•	Take screenshots  
+•	Show mokka + matlab + python option to generate averaged marker for joint center (e.g. elbow), show online option  
+•	Provide example of calculation of a joint center marker from a) dynamic movement trials and b) regression equation  
+  
+### 2. Scaling  
 _How to scale a model?_  
 There are three ways to scale a model when using the scaling tool in OpenSim, you can scale using:  
 •	Marker data  
@@ -69,11 +67,10 @@ Manual scaling uniformly means the segments in the generic model will be scaled 
 For example, if the scale factor of 0.5 is applied uniformly on ‘thorax’, the result will show that thorax is halved equally in x, y and z directions.
 Non-uniform scaling is recommended during the manual scaling, this allows models to be scaled differently in different directions.  
 If you are scaling a model using both manual scaling and marker data approach, then you need to carry out the following steps to prepare the necessary information:  
-
-![Scale Tool](https://raw.githubusercontent.com/RostiReadioff/InstructionalDocuments/main/ScaleTool.png).
- 
-This figure shows scale tool which consists of three tabs: ‘Settings’, ‘Scale Factors’, and ‘Static Pose Weights’. 
-
+![Scale Tool](https://raw.githubusercontent.com/RostiReadioff/InstructionalDocuments/main/ScaleTool.png).  
+  
+This figure shows scale tool which consists of three tabs: ‘Settings’, ‘Scale Factors’, and ‘Static Pose Weights’.  
+  
 The Settings tab:  
 •	The box on the upper left, Subject Data, defines the scaled model’s name, mass and model marker file (usually the models already consist of a marker set, and this option adds an additional marker set to the model).
 _IMPORTANT NOTE_: Here, the mass is _NOT_ the total mass of a subject, but instead it is the mass of the model.
